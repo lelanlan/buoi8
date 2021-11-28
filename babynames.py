@@ -63,7 +63,7 @@ def main():
   args = sys.argv[1:]
 
   if not args:
-    print('usage: [--summaryfile] file [file ...]') #python babynames.py --summaryfile baby1990.txt
+    print('usage: [--summaryfile] file [file ...]') #python babynames.py --summaryfile baby1990.html
     sys.exit(1)
 
   # Notice the summary flag and remove it from args if it is present.
