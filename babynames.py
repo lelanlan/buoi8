@@ -10,9 +10,7 @@ import sys
 import re
 
 """Baby Names exercise
-
 Định nghĩa hàm extract_names() dưới đây và gọi từ hàm main().
-
 Cấu trúc các tag html trong các file baby.html như sau:
 ...
 <h3 align="center">Popularity in 1990</h3>
@@ -21,7 +19,6 @@ Cấu trúc các tag html trong các file baby.html như sau:
 <tr align="right"><td>2</td><td>Christopher</td><td>Ashley</td>
 <tr align="right"><td>3</td><td>Matthew</td><td>Brittany</td>
 ...
-
 Các bước nên làm tuần tự:
  -Trích xuất năm
  -Lấy và in ra tên và thứ hạng phổ biến
@@ -30,34 +27,30 @@ Các bước nên làm tuần tự:
 """
 
 def extract_names(filename):
-    file= open(filename,'r+')
-    list_=str(file.read())
-    j=(re.findall('<td>.*</td>',list_))
-    nam=str(re.findall("<h3.*.h3>",list_))
-    k=re.findall("[0-9]{4}",nam)
-    h=str(k[0])
-    li=[]
-    li.append(h)
-    for i in j:
-      c=re.findall("[^></t][a-zA-Z]+|[0-9]+",i)
-      for a in range(1,3):
-        str1=c[a]+" "+c[0]
-      li.append(str1)
-    li.sort()
-    return li
-
-
-#print(extract_names("baby1990.html"))
-
-
-""" Cho một file .html, trả ra list bắt đầu bằng năm, 
+  """
+  Cho một file .html, trả ra list bắt đầu bằng năm, 
   theo sau bởi các chuỗi tên-xếp hạng theo thứ tự abc.
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
   # +++your code here+++
+  result=[]
+  with open(filename, 'r') as file_again:
+      for i in file_again:
+        year = re.search("Popularity in (.*?)<",i)
+        baby = re.search("<td>(.*?)</td><td>(.*?)</td><td>(.*?)</td>",i)
+        # <td>904</td><td>Markel</td><td>Rhianna</td>
+        if year :
+          result_year = year.group(1)
+        if baby :
+          boy = baby.group(2)+" "+baby.group(1)
+          girl = baby.group(3)+" "+baby.group(1)
+          result.append(boy)
+          result.append(girl)
+        result.sort()
+      result1= [result_year]
+      result1.extend(result)
+  return (result1)
 
-
-  
 def main():
   # Chương trình này có thể nhận đối số đầu vào là một hoặc nhiều tên file
   args = sys.argv[1:]
@@ -90,4 +83,3 @@ def main():
   
 if __name__ == '__main__':
   main()
-
