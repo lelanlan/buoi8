@@ -26,30 +26,24 @@ Các bước nên làm tuần tự:
  -Sửa hàm main() để dùng hàm extract_names.
 """
 
+
 def extract_names(filename):
-  """
-  Cho một file .html, trả ra list bắt đầu bằng năm, 
-  theo sau bởi các chuỗi tên-xếp hạng theo thứ tự abc.
-  ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
-  """
-  # +++your code here+++
-  result=[]
-  with open(filename, 'r') as file_again:
-      for i in file_again:
-        year = re.search("Popularity in (.*?)<",i)
-        baby = re.search("<td>(.*?)</td><td>(.*?)</td><td>(.*?)</td>",i)
-        # <td>904</td><td>Markel</td><td>Rhianna</td>
-        if year :
-          result_year = year.group(1)
-        if baby :
-          boy = baby.group(2)+" "+baby.group(1)
-          girl = baby.group(3)+" "+baby.group(1)
-          result.append(boy)
-          result.append(girl)
-        result.sort()
-      result1= [result_year]
-      result1.extend(result)
-  return (result1)
+    file= open(filename,'r+')
+    list_=str(file.read())
+    j=(re.findall('<td>.*</td>',list_))
+    nam=str(re.findall("<h3.*.h3>",list_))
+    k=re.findall("[0-9]{4}",nam)
+    h=str(k[0])
+    li=[]
+    li.append(h)
+    for i in j:
+      c=re.findall("[^></t][a-zA-Z]+|[0-9]+",i)
+      for a in range(1,3):
+        str1=c[a]+" "+c[0]
+      li.append(str1)
+    li.sort()
+    return li
+
 
 def main():
   # Chương trình này có thể nhận đối số đầu vào là một hoặc nhiều tên file
