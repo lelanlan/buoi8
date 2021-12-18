@@ -22,3 +22,4 @@ str1 = "Emma25aaa is Data scientist50 and AI Expert 99abc999 9nex90"
 print(alpha_num(str1))
 aaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaa
+lalalallalalalalllalal
